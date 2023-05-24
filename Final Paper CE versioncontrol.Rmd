@@ -1,0 +1,115 @@
+---
+title: "Final Paper"
+author: "Claudia Erber"
+date: "2023-05-17"
+output:
+  html_document: default
+  word_document: default
+---
+
+
+# **Statistical Analysis of Behavioral Data**
+
+Learning how to use RStudio, RMarkdown and GitHub
+Dead line 02/06/2023
+Intensive course online from 17 to 21 May
+The present RMarkdown is the second time I do each Session as way to record the lessons and practice the use of R.
+
+
+## **Session Summary 1 Intensive Course (170523)**
+
+- Exercise 1 very difficult, watch the videos many times before hands on, and lost time
+- Exercise 2 it feels little bit easier, but had problems to find some symbols in my pc
+- Exercise 3 I got to solve the symbols problem and I used the link with the answers to get more familiar with the R language
+- Exercise 4 R Markdown still a challenge at moment but I like it!
+
+## **Session Summary 1 Second Course:**
+- All the exercises were done following the Exercise Solutions codes and explanation. No issues during the process. 
+
+#*Exercise 1*
+#creating new directory and new script to check how much I learned during the course
+
+#how to use help
+help(mean)
+?mean
+help("mean")
+
+#use the code plot
+plot(1:10) 
+
+#create variable first_num and assign the value 42
+first_num <- 42
+first_char <- "my first character"
+
+#Remove the variable first_num from your environment using the rm() function.
+rm(first_num)
+#list all variables in the workspace 
+ls()  
+
+#assign another value to an existing variable
+#Assign the value "my second character" to the variable first_char
+first_char <- "my second variable"
+#display the value
+first_char
+
+#useful directories in my Project directory
+dir.create(path = 'data')
+dir.create(path = 'output')
+list.files(include.dirs = TRUE)
+
+#doing the exercise for the second time, feels much easier to work in RStudio
+
+##*Exercise 2*
+#importing and manipulating data frames
+#download the data file whaledata.xlsx
+#Name the file ‘whaledata.txt’ and save it to the data directory
+#import the ‘whaledata.txt’ file into R
+whale <- read.table('data/whaledata.txt', header = TRUE, stringsAsFactors = TRUE)
+
+#use the head() function to display the first 5 rows of your dataframe
+head(whale)
+
+# use the names() function which will return a vector of variable names from your dataset
+names(whale)
+
+#use the str() function to display the structure of the dataset and a neat summary of your variables
+str(whale)
+# 'data.frame': 100 obs. of  8 variables:
+#  $ month          : Factor w/ 2 levels "May","October": 1 1 1 1 ...
+#  $ time.at.station: int  1344 1633 743 1050 1764 580 459 ...
+#  $ water.noise    : Factor w/ 3 levels "high","low","medium": 2 3 3 3 ...
+#  $ number.whales  : int  7 13 12 10 12 10 5 8 11 12 ...
+#  $ latitude       : num  60.4 60.4 60.5 60.3 60.4 ...
+#  $ longitude      : num  -4.18 -4.19 -4.62 -4.35 -5.2 ...
+#  $ depth          : int  520 559 1006 540 1000 1000 993 988 ...
+#  $ gradient       : int  415 405 88 409 97 173 162 162 245 161 ..
+
+# the dataframe whale has 100 observations
+# the dataframe whale has 8 variables
+# the variables month and water.noise are factors
+
+#get useful summary of your dataframe by using the summary() function
+summary(whale)
+#    month    time.at.station  water.noise number.whales      latitude        
+# May    :50   Min.   :  60.0   high  :15   Min.   : 0.00   Min.   :60.29   
+# October:50   1st Qu.: 693.8   low   :28   1st Qu.: 9.00   1st Qu.:60.69   
+#              Median :1077.5   medium:57   Median :11.00   Median :61.29  
+#              Mean   :1064.7               Mean   :11.56   Mean   :61.16  
+#              3rd Qu.:1349.2               3rd Qu.:14.00   3rd Qu.:61.59     
+#              Max.   :2158.0               Max.   :28.00   Max.   :62.10     
+#                                           NA's   :1    
+
+# the variable number.whales has one missing value (NA)
+
+
+## **Session Summary 2(180523)**
+-problem to get the doc.rmd in Git tab   
+-created many repositories in Github  
+
+## **Session Summary 2 Second Course:**
+#Git already installed
+#Profile in Git created
+#New Repository created FinalPaperCE 
+
+
+## **Session 3:**  
