@@ -11,9 +11,11 @@ output:
 # **Statistical Analysis of Behavioral Data**
 
 Learning how to use RStudio, RMarkdown and GitHub
-Dead line 02/06/2023
-Intensive course online from 17 to 21 May
-The present RMarkdown is the second time I do each Session as way to record the lessons and practice the use of R.
+- Dead line 02/06/2023
+
+- Intensive course online from 17 to 21 May
+
+#The present RMarkdown is the second time that I am practicing each Course Session.
 
 
 ## **Session Summary 1 Intensive Course (170523)**
@@ -26,7 +28,7 @@ The present RMarkdown is the second time I do each Session as way to record the 
 ## **Session Summary 1 Second Course:**
 - All the exercises were done following the Exercise Solutions codes and explanation. No issues during the process. 
 
-#*Exercise 1*
+#*#EXERCISE 1 in RBOOK*
 #creating new directory and new script to check how much I learned during the course
 
 #how to use help
@@ -59,7 +61,7 @@ list.files(include.dirs = TRUE)
 
 #doing the exercise for the second time, feels much easier to work in RStudio
 
-##*Exercise 2*
+#*EXERCISE 2 in RBOOK*
 #importing and manipulating data frames
 #download the data file whaledata.xlsx
 #Name the file ‘whaledata.txt’ and save it to the data directory
@@ -107,10 +109,298 @@ summary(whale)
 -created many repositories in Github  
 
 ## **Session Summary 2 Second Course:**
-#Git already installed
-#Profile in Git created
-#New Repository created FinalPaperCE 
+-Git already installed
+-Profile in Git created
+-New Repository created FinalPaperCE 
+-no issues to pull, push and commit files
 
 
 
 ## **Session 3:**  
+#All exercise were better understood 
+#one Errorduring exercise 4: ‘>’ not meaningful for factors
+
+#*EXERCISE 3 in RBOOK*
+whale <- read.table('data/whaledata.txt', header = TRUE, stringsAsFactors = TRUE)
+
+#summary of your dataframe
+summary(whale)
+
+#using the square bracket [ ]
+# Extract all the elements of the first 10 rows and the first 4 columns of the whale dataframe and assign to a new variable called whale.sub.
+# first 10 rows and first 4 columns
+whale.sub <- whale[1:10, 1:4]        
+
+#extract all observations from the whale dataframe and the columns month, water.noise and number.whales and assign to a variable called whale.num.
+# all rows and columns 1, 3 and 6
+whale.num <- whale[, c(1, 3, 4)] 
+
+#extract the first 50 rows and all columns form the original dataframe and assign to a variable whale.may
+# all rows and columns 1, 3 and 6
+whale.num <- whale[, c(1, 3, 4)]
+#extract the first 50 rows and all columns form the original dataframe and assign to a variable whale.may 
+# alternative way of indexing columns with named indexes
+whale.num <- whale[, c("month", "water.noise", "number.whales")]
+# first 50 rows and all columns
+whale.may <- whale[1:50, ]
+
+#extract all rows except the first 10 rows and all columns except the last column
+# excluding first 10 rows and last column using negative indexing
+whale.last <- whale[-c(1:10), -8]
+# more general way if you have lots of columns
+whale.last <- whale[-c(1:10), -c(ncol(whale))] 
+
+#Extract rows from your dataframe based on the following criteria
+
+#at depths greater than 1200 m
+whale.1200 <- whale[whale$depth > 1200, ]
+
+#gradient steeper than 200 degrees
+whale.200 <- whale[whale$gradient > 200, ]
+
+#water noise level of ‘low’
+whale.low <- whale[whale$water.noise == "low", ]
+
+#water.noise level of ‘high’ in the month of ‘May’
+whale.h.may <- whale[whale$water.noise == "high" & whale$month == "May", ]
+
+#month of ‘October’, water noise level of ‘low’ and gradient greater than the median value of gradient (132)
+whale.subset <- whale[whale$month == "October" & whale$water.noise == "low" & whale$gradient > 132, ]
+
+#all observations from between latitudes 60.0 and 61.0 and longitudes -6.0 and -4.0
+whale.lat.long <- whale[whale$latitude > 60 & whale$latitude < 61 & whale$longitude > -6 & whale$longitude < -4, ]
+
+#all rows that do not have a water noise level of medium
+whale.nomed <- whale[whale$water.noise != "medium", ]
+
+#modify the gradient to use the median() function rather than hard coding the value 132.
+whale.subset <- whale[whale$month == "October" & whale$water.noise == "low" & whale$gradient > median(whale$gradient), ]
+
+#extract all rows from the dataframe whale with depths greater than 1500 m and with a greater number of whales spotted than average
+#results in a dataframe filled with NAs.
+whale.new <- whale[whale$depth > 1500 & whale$number.whales > mean(whale$number.whales), ]
+
+#the variable number.whales contains 1 NA value. By default the mean function will return an NA.  use the na.rm argument to & ignore NAs
+whale.new <- whale[whale$depth > 1500 & whale$number.whales > mean(whale$number.whales, na.rm = TRUE), ]
+
+#use the subset() function to extract all rows in ‘May’ with a time at station less than 1000 minutes and a depth greater than 1000 m
+subset(whale, month == "May" & time.at.station < 1000 & depth > 1000)
+
+#use subset() to extract data collected in ‘October’ from latitudes greater than 61 degrees but only include the columns month, latitude, longitude and number.whales.
+subset(whale, month == "October" & latitude > 61, select = c("month", "latitude", "longitude", "number.whales"))
+
+#Exercise Error : ‘>’ not meaningful for factors
+
+#use the order() function to sort your dataframes
+#sort all rows in the whale dataframe in ascending order of depth and store this sorted dataframe in a variable called whale.depth.sort.
+whale.depth.sort <- whale[order(whale$depth), ]
+
+#sort all rows in the whale dataframe by ascending order of depth within each level of water noise
+# notice how the variable water.noise has been ordered
+whale.sorted <- whale[order(whale$water.noise, whale$depth), ]
+
+#Repeat the previous ordering but this time order by descending order of depth within each level of water noise.
+# use '-' to reverse the order of depth
+whale.rev.sorted <- whale[order(whale$water.noise, -whale$depth), ]
+
+#summarising variables
+
+#mean time at station
+mean(whale$time.at.station)
+
+#median depth
+median(whale$depth)
+
+# number of observations
+length(whale$number.whales)
+
+#summarising one variable conditional on the level of another factor variable
+
+#calculate the mean number of whales sighted at each of the three levels of water noise
+tapply(whale$number.whales, whale$water.noise, mean)
+
+# use the na.rm argument again
+tapply(whale$number.whales, whale$water.noise, mean, na.rm = TRUE)
+
+# alternative method using the with() function. see ?with
+with(whale, tapply(number.whales, water.noise, mean, na.rm = TRUE))
+
+#calculate the median number of whales sighted at each level of water noise and for each month
+# when using multiple factors these need to be supplied as a list
+tapply(whale$number.whales, list(whale$water.noise, whale$month), median, na.rm = T
+
+#Use the aggregate() function to calculate the mean of time at station, number of whales, depth and gradient for each level of water noise
+
+aggregate(whale[, c(2, 4, 7, 8)], by = list(water.noise = whale$water.noise), mean, na.rm = TRUE)
+
+aggregate(whale[, c(2, 4, 7, 8)], by = list(water.noise = whale$water.noise, month = whale$month), mean, na.rm = TRUE)
+
+#display the mean values to 2 decimal places rather than the default of 3 decimal places.
+# optional question. Need to specify a function 'on the fly' using function(x){}
+
+aggregate(whale[, c(2, 4, 7, 8)], by = list(water.noise = whale$water.noise, month = whale$month), function(x) { round(mean(x, na.rm = TRUE), digits = 2) })
+
+#Use the table() function to determine the number of observations for each level of water noise
+table(whale$water.noise)
+#Use the table() function display the number of observations for each combination of water noise and month
+table(whale$water.noise, whale$month)
+
+#use the xtabs() function to replicate the use of the table() function.
+
+xtabs(~ water.noise, data = whale)
+xtabs(~ month + water.noise, data = whale)
+
+#*EXERCISE 4 in RBOOK*
+#import the ‘squid1.txt’ file
+squid <- read.table('data/squid1.txt', header =TRUE, stringsAsFactors = TRUE)
+str(squid)
+summary(squid)
+
+#Plot the relationship between DML on the x axis and weight on the y axis
+# clearly not linear
+plot(squid$DML, squid$weight)
+
+#Transforming the weight variable with either a natural log (log()) 
+squid$weight.sqrt <- sqrt(squid$weight)
+squid$weight.log <- log(squid$weight)
+#ERROR ‘sqrt’ not meaningful for factors
+
+#create new variables in the squid dataframe for your transformed variables and use these variables when creating your new plots
+par(mfrow = c(1,2))
+plot(squid$DML, squid$weight.sqrt)
+plot(squid$DML, squid$weight.log)
+
+# the square root transformation looks
+jpeg('output/ex4_transf_plot.jpeg')
+plot(squid$DML, squid$weight.sqrt)
+dev.off()
+png('output/ex4_transf_plot.png')
+plot(squid$DML, squid$weight.sqrt)
+dev.off()
+
+#exploring the relationships between multiple continuous variables
+#Create a pairs plot for the variables; DML, weight, eviscerate.weight, ovary.weight, nid.length, and nid.weight
+# vanilla pairs plot
+pairs(squid[, c(5, 8, 9, 11, 12, 13)])
+
+#Modify the pairs plot to include a histogram of the variables on the diagonal panel and include a correlation coefficient for each relationship on the upper triangle panels. Also include a smoother (wiggly line) in the lower triangle panels to help visualise these relationships
+## customise the plot (need to define the panel.hist and panel.cor functions first)
+pairs(squid[, c(5, 8, 9, 11, 12, 13)], diag.panel = "deeppink", upper.panel = "yellowgreen", lower.panel = "deepblue")
+#Error in get(as.character(FUN), mode = "function", envir = envir)
+
+#Create a boxplot to visualise the differences in DML at each maturity stage
+# note: Fmaturity is the recoded maturity.stage variable cerated in Q4
+
+str(squid)
+# convert variables to factors
+squid$Fmaturity <- factor(squid$maturity.stage)
+squid$Fmonth <- factor(squid$month)
+squid$Fyear <- factor(squid$year)
+str(squid)
+boxplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML")
+
+# violin plot
+library(vioplot)
+vioplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML", col = "lightblue")
+ 
+## **Session Summary 3(190523)**
+boxplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML")
+#ERROR 
+library(vioplot)
+vioplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML", col = "lightblue")
+#Peter´s solution below
+library(vioplot)
+vioplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML", col = "lightblue")
+
+
+## **Session Summary 3 Second Course:**
+-Error ‘>’ not meaningful for factors
+
+
+## **Session 4:**
+
+#*EXERCISE 1 - Test Finder*
+#A Difference
+#B linear regression
+#C one level of grouping
+#D data are replicatable
+#F data are independent
+
+#Exercise with the Box3.4a
+databox <- read.table('data/databox.txt', header =TRUE, stringsAsFactors = TRUE)
+
+head(databox)
+str(databox)
+summary(databox)
+
+#error: object 'nitrogen' not found
+
+Wrst <- read.table('data/databox.txt', header = TRUE, stringsAsFactors = TRUE)
+str(Wrst)
+#following Peter´s script to solve
+list.files()
+Wrst <- read.table(data/databox.txt', header = TRUE, stringsAsFactors = TRUE)
+#OK
+
+m1 <- mean(control)
+m2 <- mean(nitrogen)
+tmeans <- c(m1, m2)
+se1 <- se(control)
+se2 <- se(nitrogen)
+labels <- c("control", "nitrogen")
+library(vioplot)
+#error : nothing happened
+
+
+#*EXERCISE  in Box 3.1 AQB5th*
+#using Gigartina dataset* from Intro2R
+#response variable is diameter
+#predictor / grouping variable is diatom.treat has 4 groups (ASGM, Sexpo, Sstat, Sdecl)( factor in Box 3.1, which has seven groups: A-G)
+
+#use m1 to do 3 things to test normality:
+#Shapiro-Wilk statistical test of normality,if p <0.05, significantly  different from normal
+
+gigartina <- read.table('data/gigartina.txt', header =TRUE, stringsAsFactors = TRUE)
+
+#error to find the diameter, using previous Peter´s explanation
+# have to tell it where data is with data = Wrst
+Wrst <- read.table('data/Gigartina.txt', header = TRUE, stringsAsFactors = TRUE)
+
+#called data frame Wrst for tests
+# using summary() and str() to check how R see data
+str(Wrst)
+summary(Wrst)
+str(Wrst)
+
+#Shapiro-wilkstatistical test of normality,if p<0.05 significantly different from normal
+m1 <- glm(diameter ~ diatom.treat, data = gigartina)
+
+#error AGAIN object 'diameter' not found
+
+shapiro.test(resid(m1))
+# Error object 'm1' not found
+
+#plot residual & a normal distribution
+#check with summary resid((m1))
+summary(resid(m1))
+
+#min -10.4, max 11.6, try -12, 12,1
+hist(resid(m1)), breaks = seq(-12,12,1))
+hist.ht <-lenght(resid(m1))
+yv <-norm(xv,mean =0.0, sd = sqrt(var(resid(m1))*1
+
+#test for normality & variance: Bartlet & Fligner
+#if p <0.05, significant different form normal
+bartlett.test(diameter ~ diatom.treat, data = gigartina)
+fligner.test(diameter ~ diatom.treat, data = gigartina)
+
+
+
+## **Session Summary 3(210523)**
+-Error object 'diameter' not found
+-Error in resid(m1) : object 'm1' not found
+-Error unexpected ',' in "hist(resid(m1)),"
+
+## **Session Summary 3 Second Course:**
+-same errors as the first time I tried to do the exercise 
+- erros to find object and plot
