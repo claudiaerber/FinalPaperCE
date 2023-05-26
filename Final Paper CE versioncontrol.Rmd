@@ -423,4 +423,4 @@ fligner.test(diameter ~ diatom.treat, data = gigartina)
 ## **Session Summary 5(210523)**
 - no exercise was done
 -summary of the course
--more details about the Final Paper
+- more details about the Final Paper
