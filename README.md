@@ -36,9 +36,7 @@ Learning how to use RStudio, RMarkdown and GitHub
 ## **Session Summary 3(190523)**
 boxplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML")
 #ERROR 
-#Peter´s solution below
-library(vioplot)
-vioplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML", col = "lightblue")
+#Peter´s solutions worked
 
 ## **Session Summary 3 Second Course:**
 -Error ‘>’ not meaningful for factors, did not get to solve
@@ -47,12 +45,14 @@ vioplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML", co
 
 ## **Session Summary 4(200523)**
 -Error object 'diameter' not found
--Error in resid(m1) : object 'm1' not found
--Error unexpected ',' in "hist(resid(m1)),"
+-Error object 'm1' not found
+-Error unexpected in "hist(resid(m1)),"
+- Claudia problem using AQB Box 3.3c
 
 ## **Session Summary 4 Second Course:**
--same errors as the first time I tried to do the exercise 
-- erros to find object and plot
+ - Claudia problem using AQB Box 3.a and 3.b
+- same errors as the first time I tried to do the exercise with Gigartine
+- errors to find object and plot
 
 
 
