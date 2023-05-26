@@ -118,7 +118,7 @@ summary(whale)
 
 ## **Session 3:**  
 #All exercise were better understood 
-#one Errorduring exercise 4: ‘>’ not meaningful for factors
+#one Error during exercise 4: ‘>’ not meaningful for factors
 
 #*EXERCISE 3 in RBOOK*
 whale <- read.table('data/whaledata.txt', header = TRUE, stringsAsFactors = TRUE)
@@ -318,6 +318,7 @@ vioplot(DML ~ Fmaturity, data = squid, xlab = "maturity stage", ylab = "DML", co
 
 
 ## **Session 4:**
+#many errors during the process to plot the data
 
 #*EXERCISE 1 - Test Finder*
 #A Difference
@@ -396,11 +397,30 @@ fligner.test(diameter ~ diatom.treat, data = gigartina)
 
 
 
-## **Session Summary 3(210523)**
+## **Session Summary 4(200523)**
 -Error object 'diameter' not found
 -Error in resid(m1) : object 'm1' not found
 -Error unexpected ',' in "hist(resid(m1)),"
 
-## **Session Summary 3 Second Course:**
+## **Session Summary 4 Second Course:**
 -same errors as the first time I tried to do the exercise 
-- erros to find object and plot
+- errors to find objects and to plot
+
+
+
+## **Session 5:**
+#data reduction (PCA) & classification (DFA)
+
+#test that can be usefull for my research:
+
+#Multivariate Discriminant Analysis to determine whether there are significant variations among the four behaviors and which parameters are most significant in differentiating the behaviors / boat status.
+
+#Discriminant Analysis, the Mahalanobis Statistical Distance (D²) for each Whiste Type to describe how the behaviors relate to each other.
+
+#A Principal Component Analysis (PCA) to describe the structure of how the acoustic emissions and behaviors are related.
+
+
+## **Session Summary 5(210523)**
+- no exercise was done
+-summary of the course
+-more details about the Final Paper
